@@ -1,56 +1,61 @@
-function sym(args) {
-    console.log(arguments);
-    let  resultofTwo=[];
-    var args = Array.prototype.slice.call(arguments);
-    for (let i = 0; i < args.length; i++) {
-        var element =[];
-        
-        if(i!=0){
-            element = resultofTwo;
-           
-        }else{
-            element = args[i];
-        }
-        if(i+1==args.length){
-            continue;
-        }
-        resultofTwo=difference(element,args[i+1]);
-        var data=differenceSwitch(element,args[i+1]);
-        data.forEach(function(entry) {
-            resultofTwo.push(entry);
-        });
-        resultofTwo.concat(data);
-        
-    }
-    
-    const finalOut = []
-    resultofTwo.forEach((value) => {
-        if (!finalOut.some(x=> (x === value))) 
-       {
-            finalOut.push(value)
-        }
-    })
+function updateInventory(arr1, arr2) {
+  // All inventory must be accounted for or you're fired!
+  for (let index = 0; index < arr2.length; index++) {
+    var productName=arr2[index][1];
+    var productQantity=arr2[index][0];
 
-    return finalOut;
-  }
-  function difference(a1, a2) {
-    var result = [];
-    if (!a2) {return;} 
-    for (var i = 0; i < a1.length; i++) {
-      if (a2.indexOf(a1[i]) === -1) {
-        result.push(a1[i]);
+    if(!ExistProduct(arr1,productName)){
+      arr1.push(arr2[index]);
+    }else{
+      for (let index = 0; index < arr1.length; index++) {
+        if(productName==arr1[index][1]){
+          arr1[index][0]=arr1[index][0]+productQantity;
+        }
       }
     }
-    return result;
   }
-  function differenceSwitch(a1, a2) {
-    var result = [];
-    if (!a1) {return;} 
-    for (var i = 0; i < a2.length; i++) {
-      if (a1.indexOf(a2[i]) === -1) {
-        result.push(a2[i]);
-      }
+  aarr1rr.sort(function(a,b){
+    if(a.item1 == b.item1){
+      return a.item2 > b.item2 ? 1 : a.item2 < b.item2 ? -1 : 0;
     }
-    return result;
+  
+    return a.item1 > b.item1 ? 1 : -1;
+  });
+  return arr1;
+}
+function ExistProduct(array, product) {
+  // All inventory must be accounted for or you're fired!
+  for (let index = 0; index < array.length; index++) {
+    if(array[index][1]==product){
+      return true;
+    }
   }
-  console.log(sym([1, 2, 3], [5, 2, 1, 4, 5]));
+  return false;
+}
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+  return function (a,b) {
+      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result * sortOrder;
+  }
+}
+// Example inventory lists
+var curInv = [
+  [21, "Bowling Ball"],
+  [2, "Dirty Sock"],
+  [1, "Hair Pin"],
+  [5, "Microphone"]
+];
+
+var newInv = [
+  [2, "Hair Pin"],
+  [3, "Half-Eaten Apple"],
+  [67, "Bowling Ball"],
+  [7, "Toothpaste"]
+];
+
+console.log(updateInventory(curInv, newInv));

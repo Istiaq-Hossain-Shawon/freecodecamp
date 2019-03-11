@@ -53,4 +53,4 @@ function sym(args) {
     }
     return result;
   }
-  console.log(sym([1, 2, 3], [5, 2, 1, 4, 5]));
+  console.log(sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]));
