@@ -14,13 +14,12 @@ function updateInventory(arr1, arr2) {
       }
     }
   }
-  aarr1rr.sort(function(a,b){
-    if(a.item1 == b.item1){
-      return a.item2 > b.item2 ? 1 : a.item2 < b.item2 ? -1 : 0;
-    }
-  
-    return a.item1 > b.item1 ? 1 : -1;
-  });
+  // arr1.sort(function(a,b){
+  //   if(a[1] == b[1]){
+  //     return a[1] > b[1] ? 1 : a[1] < b[1] ? -1 : 0;
+  //   }
+  //   return a[1] > b[1] ? 1 : -1;
+  // });
   return arr1;
 }
 function ExistProduct(array, product) {
